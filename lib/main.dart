@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vt_app/account.dart';
+import 'profile_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -44,24 +46,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        //leading: Image(image: AssetImage("assets\Ving Tsun Kung Fu Association Americas.png"), fit: BoxFit.cover),
-        leading: Image.asset("assets/Ving Tsun Kung Fu Association Americas.png"),
+        leading:
+            Image.asset("assets/Ving Tsun Kung Fu Association Americas.png"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.account_circle),
-            onPressed: (){},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfilePage(
+                          account: new Account(
+                              first_name: 'Albert', last_name: 'Tran'),
+                        )),
+              );
+            },
           ),
         ],
       ),
@@ -71,8 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Test Text Somehting2',
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              },
+              child:
+                  const Text('Go to Profile', style: TextStyle(fontSize: 20)),
             ),
             Image.asset("assets/Ving Tsun Kung Fu Association Americas.png"),
           ],
