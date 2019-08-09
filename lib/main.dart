@@ -46,6 +46,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Account current_account = null;
+
   @override
   Widget build(BuildContext context) {
     // The Flutter framework has been optimized to make rerunning build methods
@@ -60,14 +62,14 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ProfilePage(
-                          account: new Account(
-                              first_name: 'Albert', last_name: 'Tran'),
-                        )),
-              );
+              (current_account != null)
+                  ? Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ProfilePage(account: current_account)),
+                    )
+                  : Text('Sign In');
             },
           ),
         ],
@@ -80,10 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()),
-                );
+                current_account =
+                    new Account(first_name: 'First', last_name: 'Last');
               },
               child:
                   const Text('Go to Profile', style: TextStyle(fontSize: 20)),
