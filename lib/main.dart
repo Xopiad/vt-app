@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vt_app/account.dart';
 import 'profile_page.dart';
+import 'search_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -67,9 +68,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              ProfilePage(account: current_account)),
-                    )
+                              ProfilePage(account: current_account)))
                   : Text('Sign In');
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchPage()));
             },
           ),
         ],
@@ -82,11 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                current_account =
-                    new Account(first_name: 'First', last_name: 'Last');
+                current_account = dummyAccount();
               },
-              child:
-                  const Text('Go to Profile', style: TextStyle(fontSize: 20)),
+              child: const Text('Sign In to Dummy Account',
+                  style: TextStyle(fontSize: 20)),
             ),
             Image.asset("assets/Ving Tsun Kung Fu Association Americas.png"),
           ],
@@ -94,4 +100,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Account dummyAccount() {
+  return Account(
+      firstName: 'First',
+      lastName: 'Last',
+      profilePicture:
+          AssetImage("assets/Ving Tsun Kung Fu Association Americas.png"),
+      emailAddress: "example@example.com",
+      phoneNumber: "1234567890",
+      billingAddress: Address(
+          address: "123 Main Street",
+          city: "New Brunswick",
+          state: "NJ",
+          zipcode: "12345"),
+      dateJoined: DateTime(2019, 1, 1),
+      membership: Membership(membershipType: MembershipType.Basic));
 }

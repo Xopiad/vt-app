@@ -24,14 +24,11 @@ class ProfilePage extends StatelessWidget {
                 decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     image: new DecorationImage(
-                        fit: BoxFit.fill,
-                        image: new AssetImage(
-                            //TODO: Change to account.profile_picture
-                            "assets/Ving Tsun Kung Fu Association Americas.png")))),
+                        fit: BoxFit.fill, image: account.profilePicture))),
             Column(
               children: <Widget>[
                 Text(
-                  '${account.first_name} ${account.last_name}',
+                  '${account.firstName} ${account.lastName}',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
@@ -42,16 +39,9 @@ class ProfilePage extends StatelessWidget {
               height: 50,
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                spacedText("email", "${account.email_address}"),
-                Divider(
-                  color: Colors.grey,
-                ),
-                spacedText("leftText", "rightText")
-              ],
-            )
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: formattedInfo(account))
           ],
         ),
       ),
@@ -63,12 +53,32 @@ class ProfilePage extends StatelessWidget {
       children: <Widget>[
         Text(leftText,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20)),
+            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
         Spacer(),
         Text(rightText,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20)),
+            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
       ],
     );
+  }
+
+  List<Widget> formattedInfo(Account account) {
+    return [
+      spacedText("Email", "${account.emailAddress}"),
+      Divider(color: Colors.grey),
+      spacedText("Phone Number", "${account.phoneNumber}"),
+      Divider(color: Colors.grey),
+      spacedText("Billing Address", "${account.billingAddress.address}"),
+      spacedText("",
+          "${account.billingAddress.city}, ${account.billingAddress.state} ${account.billingAddress.zipcode}"),
+      Divider(color: Colors.grey),
+      spacedText("Date Joined",
+          "${account.dateJoined.month}/${account.dateJoined.day}/${account.dateJoined.year}"),
+      Divider(color: Colors.grey),
+      spacedText("Phone Number", "${account.phoneNumber}"),
+      Divider(color: Colors.grey),
+      spacedText(
+          "Membership Type", "${account.membership.membershipTypeToString()}"),
+    ];
   }
 }
