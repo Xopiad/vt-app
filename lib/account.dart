@@ -49,8 +49,9 @@ class Membership {
   MembershipType membershipType;
   DateTime startDate;
   DateTime endDate;
+  SchoolAccount school;
 
-  Membership({this.membershipType, this.startDate, this.endDate});
+  Membership({this.membershipType, this.startDate, this.endDate, this.school});
 
   String membershipTypeToString() {
     //TODO: Get rid of this when Dart support enums with custom values
@@ -66,4 +67,12 @@ class Membership {
 
 class BasicContactInfo {
   //TODO: Figure out how to deal with this
+}
+
+class SchoolAccount {
+  String schoolName;
+  List<Account> instructors; //Change this for security?
+  Address location;
+
+  SchoolAccount({this.schoolName, this.instructors, this.location});
 }

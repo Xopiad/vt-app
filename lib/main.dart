@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vt_app/account.dart';
-import 'profile_page.dart';
-import 'search_page.dart';
+import 'package:vt_app/profile_page.dart';
+import 'package:vt_app/search_page.dart';
+import 'package:vt_app/sign_in_page.dart';
+import 'package:vt_app/dialogs.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,7 +49,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Account current_account = null;
+  Account currentAccount = null;
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +59,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        leading:
-            Image.asset("assets/Ving Tsun Kung Fu Association Americas.png"),
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {},
+        ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.account_circle),
+            icon: Icon(Icons.account_circle), //Replace with profile picture
             onPressed: () {
-              (current_account != null)
+              (currentAccount != null)
                   ? Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              ProfilePage(account: current_account)))
-                  : Text('Sign In');
+                              ProfilePage(account: currentAccount)))
+                  : Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignInScreen()));
             },
           ),
           IconButton(
@@ -89,10 +94,22 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                current_account = dummyAccount();
+                currentAccount = dummyAccount();
               },
               child: const Text('Sign In to Dummy Account',
                   style: TextStyle(fontSize: 20)),
+            ),
+            RaisedButton(
+              onPressed: () {
+                currentAccount = null;
+              },
+              child:
+                  const Text('Sign In to NULL', style: TextStyle(fontSize: 20)),
+            ),
+            RaisedButton(
+              onPressed: () =>
+                  Dialogs.information(context, "Dialog Title", "Dialog Text"),
+              child: const Text('Dialog Test', style: TextStyle(fontSize: 20)),
             ),
             Image.asset("assets/Ving Tsun Kung Fu Association Americas.png"),
           ],
@@ -116,5 +133,14 @@ Account dummyAccount() {
           state: "NJ",
           zipcode: "12345"),
       dateJoined: DateTime(2019, 1, 1),
-      membership: Membership(membershipType: MembershipType.Basic));
+      membership: Membership(
+        membershipType: MembershipType.Basic,
+        startDate: DateTime.utc(2019, 1, 1),
+        endDate: DateTime.utc(2020, 1, 1),
+        school: dummySchoolAccount(),
+      ));
+}
+
+SchoolAccount dummySchoolAccount() {
+  return SchoolAccount(schoolName: "Ving Tsun NJ");
 }
