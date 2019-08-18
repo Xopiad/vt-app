@@ -87,8 +87,6 @@ class ProfilePage extends StatelessWidget {
       spacedText("Date Joined",
           "${account.dateJoined.month}/${account.dateJoined.day}/${account.dateJoined.year}"),
       Divider(color: Colors.grey),
-      spacedText("Phone Number", "${account.phoneNumber}"),
-      Divider(color: Colors.grey),
       spacedText(
           "Membership Type", "${account.membership.membershipTypeToString()}"),
     ];

@@ -41,6 +41,12 @@ class EditProfilePage extends StatelessWidget {
             ),
             TextFormField(
               enableInteractiveSelection: true,
+              decoration: InputDecoration(labelText: 'Name'),
+              initialValue: //Should this be split??
+                  "${this.account.firstName} ${this.account.lastName}",
+            ),
+            TextFormField(
+              enableInteractiveSelection: true,
               decoration: InputDecoration(labelText: 'Email'),
               initialValue: this.account.emailAddress,
             ),
@@ -48,6 +54,26 @@ class EditProfilePage extends StatelessWidget {
               enableInteractiveSelection: true,
               decoration: InputDecoration(labelText: 'Phone Number'),
               initialValue: this.account.phoneNumber,
+            ),
+            TextFormField(
+              enableInteractiveSelection: true,
+              decoration: InputDecoration(labelText: 'Street Address'),
+              initialValue: this.account.billingAddress.address,
+            ),
+            TextFormField(
+              enableInteractiveSelection: true,
+              decoration: InputDecoration(labelText: 'City'),
+              initialValue: this.account.billingAddress.city,
+            ),
+            TextFormField(
+              enableInteractiveSelection: true,
+              decoration: InputDecoration(labelText: 'State'),
+              initialValue: this.account.billingAddress.state,
+            ),
+            TextFormField(
+              enableInteractiveSelection: true,
+              decoration: InputDecoration(labelText: 'Zip Code'),
+              initialValue: this.account.billingAddress.zipcode,
             ),
           ],
         ),
