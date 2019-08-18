@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vt_app/edit_profile_page.dart';
 import 'account.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -11,7 +12,18 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
-        actions: <Widget>[],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          EditProfilePage(account: this.account)));
+            },
+          ),
+        ],
       ),
       body: Center(
         child: ListView(
@@ -21,9 +33,9 @@ class ProfilePage extends StatelessWidget {
                 width: 190.0,
                 height: 190.0,
                 margin: EdgeInsets.symmetric(vertical: 25, horizontal: 100),
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    image: new DecorationImage(
+                    image: DecorationImage(
                         fit: BoxFit.fill, image: account.profilePicture))),
             Column(
               children: <Widget>[
