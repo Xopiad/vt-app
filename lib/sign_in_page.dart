@@ -37,6 +37,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: 15.0,
                         ),
                         TextField(
+                          obscureText: true,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
                             labelText: "Password",
